@@ -74,7 +74,6 @@ export default function TouchInput({word, action}: TouchInputProps) {
         endTyping();
       }
     }
-    // console.log("key");
     time_end.current = Date.now();
   }
 

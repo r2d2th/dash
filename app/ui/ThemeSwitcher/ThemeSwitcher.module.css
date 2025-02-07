@@ -16,7 +16,7 @@
   position: relative;
   height: 30px;
   width: 60px;
-  composes: comptest;
+  /* composes: comptest; */
   /* top: 10px; */
   top: var(--comtest-top);
 }
