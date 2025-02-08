@@ -25,15 +25,4 @@ function getInitialColorMode() {
 
 let html = document.querySelector("html");
 let sysTheme = getInitialColorMode();
-html.setAttribute("datatheme", sysTheme);
-
-// console.log("sysTheme", sysTheme);
-
-
-// if(!html.getAttribute("datatheme")) {
-//   let sysTheme = getInitialColorMode();
-// console.log("sysTheme", sysTheme);
-//   html.setAttribute("datatheme", sysTheme);
-// }
-// alert('some message');
-// console.log('some message', getBodyArribute());
+html.setAttribute("data-theme", sysTheme);
