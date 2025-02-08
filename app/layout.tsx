@@ -52,7 +52,6 @@ export default function RootLayout({
   // useEffect(() => {
   //   setColorMode(getInitialColorMode());
   // }, []);
-  // console.log("QAZ", children);
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
