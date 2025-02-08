@@ -77,9 +77,9 @@ export default function TouchInput({word, action}: TouchInputProps) {
     time_end.current = Date.now();
   }
 
-  // useEffect(() => {
-  //   setSample(initSampleText(inputMaxLen));
-  // }, [word]);
+  useEffect(() => {
+    setSample(getSampleText(word, inputMaxLen));
+  }, [word]);
 
   // const className = clsx({
   //   [styles['toucher-input']]: true, 
