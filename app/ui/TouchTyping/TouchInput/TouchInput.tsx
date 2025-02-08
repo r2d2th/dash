@@ -2,7 +2,7 @@
 import styles from './TouchInput.module.css';
 import { useRef, useEffect, useState, useCallback } from 'react';
 import begin  from './eng_begin';
-import { TouchInputProps } from '../touch.interface';
+import { TouchResult, TouchInputProps } from '../touch.interface';
 import clsx from 'clsx';
 
 const inputMaxLen: number = 90;
@@ -47,15 +47,15 @@ export default function TouchInput({word, action}: TouchInputProps) {
     }
   }, [sample, error]); 
   
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPara(t => e.target.value);
     console.log('handleChange', para.length, sample.length);
   }
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
     if(!time_start.current)
       time_start.current = Date.now();
-    if(event.key == "Enter") {
+    if(e.key == "Enter") {
       if(para.length == sample.length) {
         endTyping();
       }
@@ -63,10 +63,10 @@ export default function TouchInput({word, action}: TouchInputProps) {
         setPara(para => para + '\u{00b6}');
       }
     }
-    if(event.key == "CapsLock") {
+    if(e.key == "CapsLock") {
       setPara(para => para + '\u{21ea}');
     }
-    if(event.key == " ") {
+    if(e.key == " ") {
       if(para.length == sample.length) {
         e.preventDefault();
         e.stopPropagation();

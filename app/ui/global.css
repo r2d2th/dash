@@ -23,7 +23,7 @@ html {
   --kb-primary-text-color: #000;
 }
 
-html[datatheme="dark"] {
+html[data-theme="dark"] {
   --tt-main-bg-color: #032b43;
   --kb-main-bg-color: #032b43;
   --kb-primary-text-color: #ccc;

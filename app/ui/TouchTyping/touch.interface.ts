@@ -1,13 +1,13 @@
-export interface TouchInputProps {
-  word: string;
-  action: () => void;
-}
-
 export interface Stat {
   word: string;
   speed: number;
   errnum: number;  // number of errors
   length: number;  // length of sample
+}
+
+export interface TouchInputProps {
+  word: string;
+  action: (arg0: Stat) => void;
 }
 
 export interface TouchOutputProps {

@@ -58,7 +58,7 @@ export default function RootLayout({
       <head>
         <script src="theme.js"></script>
       </head>
-      <body datatheme="dark" className={`${inter.className} antialiased`}>
+      <body data-theme="dark" className={`${inter.className} antialiased`}>
         {children}
       </body>
     </html>

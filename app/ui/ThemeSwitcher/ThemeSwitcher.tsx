@@ -18,27 +18,30 @@ export default function ThemeSwitcher() {
   const [check, setCheck] = useState(false);
   const [initial, setInitial] = useState(true);
   // const [initial, setInitial] = useState(false);
-  const inputRef = useRef();
-  const [styleObj, setStyleObj] = useState({'--theme-switch-transable': '0'});
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [styleObj, setStyleObj] = useState<{}>({'--theme-switch-transable': '0'});
   // styleObj['--theme-switch-transable'] = '4s';
   // const [check, setCheck] = useState(() => {
   //   const html = document.querySelector("html");
   //   console.log("defaultState", html.getAttribute('datatheme'));
   //   return html.getAttribute("datatheme") == 'dark' ? true : false;
   // });
-  function handleChange(e) {
-    let html = document.querySelector("html");
-    const theme = event.target.checked ? 'dark' : 'light';
-    html.setAttribute('datatheme', theme);
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    let html: HTMLElement | null = document.querySelector("html");
+    const theme = e.target.checked ? 'dark' : 'light';
+    if(!html)
+      return;
+    html.setAttribute('data-theme', theme);
     window.localStorage.setItem('color-mode', theme);
   }
   useEffect(() => {
-    const html = document.querySelector("html");
-    console.log("defaultState", html.getAttribute('datatheme'));
-    const b = html.getAttribute("datatheme") == 'dark' ? true : false;
-    console.log("defaultState2", b);
+    const html: HTMLElement | null = document.querySelector("html");
+    // console.log("defaultState", html.getAttribute('data-theme'));
+    const b = html?.getAttribute("data-theme") == 'dark' ? true : false;
+    // console.log("defaultState2", b);
     setCheck(b);
-    inputRef.current.checked = b;
+    if(inputRef.current)
+      inputRef.current.checked = b;
     setTimeout(() => {
       setStyleObj(s => ({...s, ['--theme-switch-transable']: '.4s'}));
       setInitial(false);
