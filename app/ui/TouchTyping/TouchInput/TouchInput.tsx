@@ -2,7 +2,7 @@
 import styles from './TouchInput.module.css';
 import { useRef, useEffect, useState, useCallback } from 'react';
 import begin  from './eng_begin';
-import { TouchResult, TouchInputProps } from '../touch.interface';
+import { TouchMark, TouchResult, TouchInputProps } from '../touch.interface';
 import clsx from 'clsx';
 
 const inputMaxLen: number = 90;
@@ -10,6 +10,7 @@ const inputMaxLen: number = 90;
 export default function TouchInput({word, action}: TouchInputProps) {
   const [para, setPara] = useState<string>('');
   const [sample, setSample] = useState<string>(getSampleText(word, inputMaxLen));
+  const [mark, setMark] = useState<TouchMark>({err: false, num: 0});
   const [error, setError] = useState<boolean>(false);
   const [errnum, setErrnum] = useState<number>(0);
   const result = useRef<TouchResult[]>([]);
@@ -28,7 +29,9 @@ export default function TouchInput({word, action}: TouchInputProps) {
     const sec_span: number = Math.floor((Date.now() - time_start.current) / 1000);
     const time_span: number = sec_span / 60;
     const speed: number = Math.floor(sample.length / time_span);
-    action({word, speed, errnum, length: sample.length});
+    // action({word, speed, errnum, length: sample.length});
+    action({word, speed, errnum: mark.num, length: sample.length});
+    setMark(m => ({...m, err: false, num: 0}));
     setErrnum(0);
     setError(false);
     setPara('');
@@ -39,6 +42,15 @@ export default function TouchInput({word, action}: TouchInputProps) {
     setPara(event.target.value);
     const len = event.target.value.length;
     const bError = sample.slice(0, len) === event.target.value ? false : true;
+    setMark(m => {
+      let {err, num} = m;
+      if(bError != err) {
+        err = bError;
+        if(bError)
+          num = num + 1;
+      }
+      return {...m, err, num}
+    });
     setError(err => bError != err ? bError : err);
     if(bError != error) {
       // setError(bError);
@@ -92,7 +104,7 @@ export default function TouchInput({word, action}: TouchInputProps) {
       <input 
         className={clsx({
           [styles['toucher-input']]: true, 
-          [styles['toucher-input-error']]: error
+          [styles['toucher-input-error']]: mark.err
         })}
         style={{outline: "none"}} 
         type="text" 

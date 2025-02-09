@@ -18,3 +18,8 @@ export interface TouchResult {
   letter: string;
   interval: number;
 }
+
+export interface TouchMark {
+  err: boolean;
+  num: number;
+}
