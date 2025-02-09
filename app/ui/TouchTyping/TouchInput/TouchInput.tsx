@@ -81,15 +81,10 @@ export default function TouchInput({word, action}: TouchInputProps) {
     setSample(getSampleText(word, inputMaxLen));
   }, [word]);
 
-  // const className = clsx({
-  //   [styles['toucher-input']]: true, 
-  //   [styles['toucher-input-error']]: error
-  // });
-
-        // className={clsx(
-        //   styles['toucher-input'], 
-        //   error && styles['toucher-input-error']
-        // )}
+  // className={clsx(
+  //   styles['toucher-input'], 
+  //   error && styles['toucher-input-error']
+  // )}
 
   // console.log("r", count.current++);
   return (
