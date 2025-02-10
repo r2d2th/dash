@@ -14,8 +14,6 @@ export default function Toucher() {
     const word_arr = begin.split(' ');
     const i = Math.floor(Math.random() * word_arr.length);
     return word_arr[i];
-    // const word_curr = word_array[index_curr];
-    // return word_curr;
   }
 
   function handleAction(stat: Stat): void {
